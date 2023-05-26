@@ -1,0 +1,6 @@
+package com.webapp.exception;
+
+
+public class EmployeeNotFoundException extends RuntimeException{
+
+}

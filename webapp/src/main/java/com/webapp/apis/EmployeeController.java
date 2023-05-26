@@ -1,0 +1,53 @@
+package com.webapp.apis;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.webapp.model.Employee;
+import com.webapp.service.EmployeeService;
+
+@RestController
+@RequestMapping(value = "/api/employee")
+public class EmployeeController {
+
+	@Autowired
+	private EmployeeService employeeService;
+
+	@PostMapping(value = "/create")
+	public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+		Employee response = employeeService.createEmployee(employee);
+		return new ResponseEntity<Employee>(response, HttpStatus.CREATED);
+	}
+
+	@GetMapping(value = "/getById/{id}")
+	public ResponseEntity<Employee> getById(@PathVariable("id") Long empId) {
+		Employee response = employeeService.getById(empId);
+		return new ResponseEntity<Employee>(response, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/all")
+	public ResponseEntity<List<Employee>> getAllEmployee() {
+		return new ResponseEntity<List<Employee>>(employeeService.getAllEmployee(), HttpStatus.OK);
+	}
+
+	@PutMapping(value = "/updateById/{id}")
+	public ResponseEntity<Employee> updateEmployeeById(@PathVariable("id") Long empId, @RequestBody Employee employee) {
+		return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, empId), HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping(value = "/deleteById/{id}")
+	public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") Long empId){
+		return new ResponseEntity<String>(employeeService.deleteEmployeeById(empId), HttpStatus.ACCEPTED);
+	}
+}

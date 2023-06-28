@@ -11,23 +11,24 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserServiceApplication implements CommandLineRunner {
+public class UserServiceApplication  {
 
-	@Autowired
-	private Job job;
-
-	@Autowired
-	private JobLauncher jobLauncher;
-
-	@Override
-	public void run(String... args) throws Exception {
-		JobParameters parms = new JobParametersBuilder().addLong("StartAt", System.currentTimeMillis())
-				.toJobParameters();
-		jobLauncher.run(job, parms);
-	}
+//	@Autowired
+//	private Job job;
+//
+//	@Autowired
+//	private JobLauncher jobLauncher;
+//
+//	@Override
+//	public void run(String... args) throws Exception {
+//		JobParameters parms = new JobParametersBuilder().addLong("StartAt", System.currentTimeMillis())
+//				.toJobParameters();
+//		jobLauncher.run(job, parms);
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserServiceApplication.class, args);
+		System.out.println("Spring batch..");
 	}
 
 }

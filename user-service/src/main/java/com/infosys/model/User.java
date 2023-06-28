@@ -3,7 +3,7 @@ package com.infosys.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collation = "User")
 public class User {
 
 	@Id
@@ -16,7 +16,6 @@ public class User {
 		super();
 	}
 	public User(int userId, String firstName, String lastName, String email) {
-		super();
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
